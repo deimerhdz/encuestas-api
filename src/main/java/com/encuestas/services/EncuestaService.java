@@ -9,7 +9,7 @@ public interface EncuestaService {
     List<Encuesta> listarEncuestas(Long idUsuario);
 
     Optional<Encuesta> obtenerEncuestaPorId(Long id);
-
+    Optional<Encuesta> obtenerEncuesta(String  hash);
     Encuesta  guardar(Encuesta encuesta);
 
     Encuesta actualizar(Long id, Encuesta encuesta);

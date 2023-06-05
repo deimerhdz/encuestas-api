@@ -5,10 +5,12 @@ import com.encuestas.repositories.EncuestaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EncuestaServiceImpl implements EncuestaService{
     @Autowired
     EncuestaRepository encuestaRepository;
@@ -20,6 +22,11 @@ public class EncuestaServiceImpl implements EncuestaService{
     @Override
     public Optional<Encuesta> obtenerEncuestaPorId(Long id) {
         return encuestaRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Encuesta> obtenerEncuesta(String hash) {
+        return Optional.of(encuestaRepository.findByHash(hash));
     }
 
     @Override

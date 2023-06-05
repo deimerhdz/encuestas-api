@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface EncuestaRepository extends JpaRepository<Encuesta,Long> {
     public List<Encuesta> findByIdUsuario(Long idUsuario);
+
+    public Encuesta findByHash(String hash);
 }

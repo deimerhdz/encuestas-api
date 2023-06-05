@@ -33,6 +33,16 @@ public class EncuestaController {
         return new ResponseEntity<>(encuesta.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/encuesta/{hash}")
+    public ResponseEntity<Encuesta> encuesta(@PathVariable String hash){
+        Optional<Encuesta> encuesta =  encuestaService.obtenerEncuesta(hash);
+
+        if(encuesta.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(encuesta.get(), HttpStatus.OK);
+    }
+
     @PostMapping("/guardar")
     ResponseEntity<Encuesta> guardar(@RequestBody Encuesta encuesta){
        Encuesta encuestaDB =  encuestaService.guardar(encuesta);
@@ -61,4 +71,6 @@ public class EncuestaController {
         };
         return new ResponseEntity<>(exito, HttpStatus.OK);
     }
+
+
 }

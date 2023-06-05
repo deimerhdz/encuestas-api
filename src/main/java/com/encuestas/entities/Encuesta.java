@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.UUID;
 
 @Table(name = "encuestas")
 @Entity
@@ -23,11 +25,17 @@ public class Encuesta {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
+    private String hash;
+
     private String titulo;
 
     private String descripcion;
 
     private Boolean estado;
+
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pregunta> preguntas;
+
     @Column(name="fecha_inicio")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime fechaRegistro;
@@ -39,6 +47,8 @@ public class Encuesta {
 
     @PrePersist
     public void prePersist(){
+        UUID uuid = UUID.randomUUID();
+        this.hash = uuid.toString();
         this.fechaRegistro = LocalDateTime.now();
         this.estado =false;
     }
