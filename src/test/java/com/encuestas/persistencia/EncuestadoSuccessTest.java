@@ -33,7 +33,7 @@ public class EncuestadoSuccessTest {
     @Test
     public void guaradarEncuestado(){
         //given
-        encuesta = new Encuesta(null,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null, LocalDateTime.now(),LocalDateTime.now());
+        encuesta = new Encuesta(null,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null,null, LocalDateTime.now(),LocalDateTime.now());
         encuesta =  encuestaRepository.save(encuesta);
         encuestado = new Encuestado(1l,"1234",encuesta.getId(),"Jose Peres","Ingenieria de sistemas","jose@email.com",LocalDateTime.now());
         //when

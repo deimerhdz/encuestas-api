@@ -25,13 +25,13 @@ public class EncuestaSuccessTest {
 
     @BeforeEach
     void setup(){
-        encuesta = new Encuesta(1l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null, LocalDateTime.now(),LocalDateTime.now());
+        encuesta = new Encuesta(1l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null,null, LocalDateTime.now(),LocalDateTime.now());
     }
     @DisplayName("Test para guardar una encuesta")
     @Test
     public void testGuardarEncuesta(){
         //given
-        Encuesta encuesta = new Encuesta(1l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null, LocalDateTime.now(),LocalDateTime.now());
+        Encuesta encuesta = new Encuesta(1l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null,null, LocalDateTime.now(),LocalDateTime.now());
         //when
         Encuesta encuestaGuardada = encuestaRepository.save(encuesta);
         //then
@@ -43,7 +43,7 @@ public class EncuestaSuccessTest {
     @Test
     public void testListarEncuesta(){
         //given
-        Encuesta encuesta1 = new Encuesta(2l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null, LocalDateTime.now(),LocalDateTime.now());
+        Encuesta encuesta1 = new Encuesta(2l,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null,null, LocalDateTime.now(),LocalDateTime.now());
         encuestaRepository.save(encuesta);
         encuestaRepository.save(encuesta1);
         //when

@@ -30,7 +30,7 @@ public class OpcionSuccessTest {
     private Opcion opcion;
     @BeforeEach
     void setup(){
-         encuesta = new Encuesta(null,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null, LocalDateTime.now(),LocalDateTime.now());
+         encuesta = new Encuesta(null,1l,"kdsfkfs","encuesta de satisfaccion","test descripcion",false,null,null, LocalDateTime.now(),LocalDateTime.now());
          encuesta = encuestaRepository.save(encuesta);
          tipoPregunta = new TipoPregunta(1l,"Opcion Multiple", "preguntas de opcion multiple");
          pregunta = new Pregunta(null,encuesta.getId(),"pregunta1",tipoPregunta.getId(),null,null);
