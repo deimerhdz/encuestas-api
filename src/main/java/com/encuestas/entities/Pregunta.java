@@ -28,7 +28,7 @@ public class Pregunta {
     @Column(name="id_tipo_pregunta")
     private Long idTipoPregunta;
 
-    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL)
     private List<Opcion> opciones;
 
     @JsonIgnore

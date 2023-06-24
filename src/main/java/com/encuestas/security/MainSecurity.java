@@ -42,7 +42,9 @@ public class MainSecurity {
                 .cors()
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/auth/**","/encuestas/encuesta/**","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html")
+                .antMatchers("/auth/**","/encuestas/encuesta/**","/encuestado/guardar","/encuestado/verificar/**","/v2/api-docs", "/configuration/ui",
+                        "/swagger-resources/**", "/configuration/security",
+                        "/swagger-ui.html", "/webjars/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
