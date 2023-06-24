@@ -2,6 +2,7 @@ package com.encuestas.services;
 
 import com.encuestas.entities.Encuesta;
 import com.encuestas.repositories.EncuestaRepository;
+import com.encuestas.repositories.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import java.util.Optional;
 public class EncuestaServiceImpl implements EncuestaService{
     @Autowired
     EncuestaRepository encuestaRepository;
+
+    @Autowired
+    GrupoRepository grupoRepository;
     @Override
     public List<Encuesta> listarEncuestas(Long idUsuario) {
         return encuestaRepository.findByIdUsuario(idUsuario);
@@ -26,11 +30,12 @@ public class EncuestaServiceImpl implements EncuestaService{
 
     @Override
     public Optional<Encuesta> obtenerEncuesta(String hash) {
-        return Optional.of(encuestaRepository.findByHash(hash));
+        return encuestaRepository.findByHash(hash);
     }
 
     @Override
     public Encuesta guardar(Encuesta encuesta) {
+
         return encuestaRepository.save(encuesta);
     }
 
@@ -40,10 +45,11 @@ public class EncuestaServiceImpl implements EncuestaService{
         Encuesta encuestaActualizada = null;
         if(encuestaDB.isPresent()){
             Encuesta  actualizarEncuesta = encuestaDB.get();
-
+            grupoRepository.deleteByIdEncuesta(actualizarEncuesta.getId());
             actualizarEncuesta.setDescripcion(encuesta.getDescripcion());
             actualizarEncuesta.setTitulo(encuesta.getTitulo());
             actualizarEncuesta.setFechaFinal(encuesta.getFechaFinal());
+            actualizarEncuesta.setGrupos(encuesta.getGrupos());
             encuestaActualizada = guardar(actualizarEncuesta);
         }else{
             return  encuestaActualizada;

@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,8 +30,12 @@ public class Encuesta {
 
     private Boolean estado;
 
-    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "encuesta",orphanRemoval = true)
     private List<Pregunta> preguntas;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name = "encuesta")
+    private List<Grupo> grupos;
 
     @Column(name="fecha_inicio")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -52,5 +53,6 @@ public class Encuesta {
         this.fechaRegistro = LocalDateTime.now();
         this.estado =false;
     }
+
 
 }

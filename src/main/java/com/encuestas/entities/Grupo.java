@@ -1,26 +1,29 @@
 package com.encuestas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name = "respuestas")
+@Table(name = "grupos")
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Respuesta {
+public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="codigo")
-    private Long codigo;
+    private Long id;
 
-    @Column(name = "id_encuestado")
-    private Long idEncuestado;
+    private String nombre;
+    @Column(name="encuesta")
+    private Long idEncuesta;
 
-    @Column(name = "id_opcion")
-    private Long opcion;
+
+
+
 
 }

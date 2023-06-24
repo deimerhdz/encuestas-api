@@ -1,7 +1,9 @@
 package com.encuestas.controllers;
 
+import com.encuestas.dto.ResultadoEncuestaDto;
 import com.encuestas.entities.Encuesta;
 import com.encuestas.services.EncuestaService;
+import com.encuestas.services.EncuestadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class EncuestaController {
 
     @Autowired
     private EncuestaService encuestaService;
+
+    @Autowired
+    private EncuestadoService encuestadoService;
 
     @GetMapping("/listar/{idUsuario}")
     public ResponseEntity<List<Encuesta>> listar(@PathVariable Long idUsuario){
@@ -32,12 +37,15 @@ public class EncuestaController {
         }
         return new ResponseEntity<>(encuesta.get(), HttpStatus.OK);
     }
-
+    @GetMapping("/resultados/{id}")
+    public ResponseEntity<List<ResultadoEncuestaDto>> resultadoEncuesta(@PathVariable Long id){
+        return new ResponseEntity(encuestadoService.listarEncuestadosPorCarrera(id), HttpStatus.OK);
+    }
     @GetMapping("/encuesta/{hash}")
     public ResponseEntity<Encuesta> encuesta(@PathVariable String hash){
         Optional<Encuesta> encuesta =  encuestaService.obtenerEncuesta(hash);
 
-        if(encuesta.isEmpty()){
+        if(!encuesta.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(encuesta.get(), HttpStatus.OK);
